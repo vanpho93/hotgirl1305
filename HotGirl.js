@@ -17,14 +17,16 @@ class HotGirl {
     }
 
     async hitLike() {
-        const sql = 'UPDATE public."HotGirl" SET "like"= "like" + 1 WHERE id = $1;';
-        await queryDB(sql, [this.id]);
+        const sql = 'UPDATE public."HotGirl" SET "like"= "like" + 1 WHERE id = $1 RETURNING "like";';
+        const result = await queryDB(sql, [this.id]);
+        const { like } = result.rows[0];
+        return like;
     }
 }
 
 module.exports = HotGirl;
 
 // const a = new HotGirl(1);
-// a.hitLike();
+// a.hitLike()
 // .then(info => console.log(info))
 // .catch(err => console.log(err));

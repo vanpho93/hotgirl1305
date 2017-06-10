@@ -21,6 +21,6 @@ app.get('/show/:id', async (req, res) => {
 app.get('/like/:id', async (req, res) => {
     const { id } = req.params;
     const hotGirl = new HotGirl(id);
-    await hotGirl.hitLike();
-    res.redirect('/show/' + id);
+    const like = await hotGirl.hitLike();
+    res.send(like + '');
 });
