@@ -9,13 +9,16 @@ class HotGirl {
         this.dislike = dislike;
     }
 
-    getInfo() {
+    async getInfo() {
         const sql = 'SELECT * FROM "HotGirl" WHERE id = $1';
-        return queryDB(sql, [this.id]);
+        const result = await queryDB(sql, [this.id]);
+        return result.rows[0];
     }
 }
 
-const a = new HotGirl(1);
-a.getInfo()
-.then(result => console.log(result.rows[0]))
-.catch(err => console.log(err));
+module.exports = HotGirl;
+
+// const a = new HotGirl(1);
+// a.getInfo()
+// .then(info => console.log(info))
+// .catch(err => console.log(err));
