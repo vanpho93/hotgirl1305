@@ -12,6 +12,7 @@ class HotGirl {
     async getInfo() {
         const sql = 'SELECT * FROM "HotGirl" WHERE id = $1';
         const result = await queryDB(sql, [this.id]);
+        if (result.rows.length === 0) throw new Error('Khong tim thay duong dan');
         return result.rows[0];
     }
 }
