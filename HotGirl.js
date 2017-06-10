@@ -15,11 +15,16 @@ class HotGirl {
         if (result.rows.length === 0) throw new Error('Khong tim thay duong dan');
         return result.rows[0];
     }
+
+    async hitLike() {
+        const sql = 'UPDATE public."HotGirl" SET "like"= "like" + 1 WHERE id = $1;';
+        await queryDB(sql, [this.id]);
+    }
 }
 
 module.exports = HotGirl;
 
 // const a = new HotGirl(1);
-// a.getInfo()
+// a.hitLike();
 // .then(info => console.log(info))
 // .catch(err => console.log(err));

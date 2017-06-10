@@ -17,3 +17,10 @@ app.get('/show/:id', async (req, res) => {
         res.send(err.toString());
     }
 });
+
+app.get('/like/:id', async (req, res) => {
+    const { id } = req.params;
+    const hotGirl = new HotGirl(id);
+    await hotGirl.hitLike();
+    res.redirect('/show/' + id);
+});
