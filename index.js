@@ -12,8 +12,9 @@ app.get('/show/:id', async (req, res) => {
     const hotGirl = new HotGirl(id);
     try {
         const info = await hotGirl.getInfo();
+        if (!info) return res.send('Khong tim thay duong dan');
         res.render('home', info);
     } catch (err) {
-        res.send(err);
+        res.send(err.toString());
     }
 });
